@@ -1,0 +1,580 @@
+/* ========================================================
+   FLOATING CHAT WITH SONA WIDGET & CHAT APPLICATION
+   Matches reference sonaherbal.com design pixel-for-pixel
+======================================================== */
+
+/* Fixed Container - Visible in the whole screen */
+.sona-floating-chat-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2147483647; /* Highest z-index so it's always on top */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: inherit;
+  pointer-events: none; /* Container doesn't block clicks */
+}
+
+/* Floating Trigger Wrapper */
+.sona-chat-trigger-wrap {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  pointer-events: auto;
+  user-select: none;
+}
+
+/* Dismiss / Hide text prompt button (Situated at top of avatar/pill connection) */
+.sona-chat-dismiss-btn {
+  position: absolute;
+  top: -8px;
+  right: 72px;
+  z-index: 10;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.sona-chat-dismiss-btn:hover {
+  color: #0f172a;
+  background: #f8fafc;
+  transform: scale(1.08);
+}
+
+.sona-chat-dismiss-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Main Clickable Trigger Button */
+.sona-chat-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+}
+
+/* "Chat with Sona" Green Pill Tab */
+.sona-chat-pill {
+  position: relative;
+  margin-right: -8px;
+  border-radius: 15px;
+  background-color: #607a52;
+  color: #ffffff;
+  padding: 12px 20px 12px 16px;
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(18, 59, 34, 0.22);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-family, 'Bricolage Grotesque', sans-serif);
+}
+
+.sona-chat-trigger-btn:hover .sona-chat-pill {
+  background-color: #516b44;
+  transform: translateX(-2px);
+  box-shadow: 0 10px 28px rgba(18, 59, 34, 0.28);
+}
+
+.sona-chat-pill.is-hidden {
+  opacity: 0;
+  transform: scale(0.8) translateX(20px);
+  pointer-events: none;
+  visibility: hidden;
+  position: absolute;
+}
+
+/* Circular Avatar Wrapper (Prominent 74px Circle with Sage Ring) */
+.sona-chat-avatar-wrap {
+  position: relative;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px #d8efd9, 0 10px 28px rgba(18, 59, 34, 0.22);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  overflow: visible;
+  padding: 6px;
+}
+
+.sona-chat-trigger-btn:hover .sona-chat-avatar-wrap {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 4px #c2e5c4, 0 12px 32px rgba(18, 59, 34, 0.28);
+}
+
+/* Sona Image */
+.sona-chat-avatar-img {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Live Active Dot */
+.sona-chat-online-dot {
+  position: absolute;
+  bottom: 6px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #10b981;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.sona-chat-online-dot::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.4);
+  animation: sonaPulse 2s infinite ease-out;
+}
+
+@keyframes sonaPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ========================================================
+   CHAT APPLICATION WINDOW (POPOVER DIALOG)
+======================================================== */
+.sona-chat-window {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 410px;
+  max-width: calc(100vw - 28px);
+  height: min(720px, calc(100vh - 36px));
+  max-height: calc(100vh - 36px);
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2147483647;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(24px) scale(0.96);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+.sona-chat-window.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Chat Header */
+.sona-chat-header {
+  background: linear-gradient(135deg, #09471f 0%, #176531 100%);
+  color: #ffffff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.sona-chat-header-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sona-chat-header-avatar {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  flex-shrink: 0;
+}
+
+.sona-chat-header-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sona-chat-header-dot {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 12px;
+  height: 12px;
+  background: #10b981;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+.sona-chat-header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sona-chat-header-name {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.sona-chat-header-status {
+  font-size: 12px;
+  color: #c9eed2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.sona-chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sona-chat-header-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  padding: 0;
+}
+
+.sona-chat-header-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* WhatsApp Banner Inside Chat */
+.sona-chat-wa-banner {
+  background: #f0fdf4;
+  border-bottom: 1px solid #dcfce7;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #166534;
+  flex-shrink: 0;
+}
+
+.sona-chat-wa-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #25d366;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 12px;
+  transition: opacity 0.2s ease;
+}
+
+.sona-chat-wa-link:hover {
+  opacity: 0.9;
+}
+
+/* Messages Stream */
+.sona-chat-body {
+  flex: 1;
+  background: #f9f7f4;
+  padding: 16px 18px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+.sona-chat-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sona-chat-body::-webkit-scrollbar-thumb {
+  background: #d4cfc7;
+  border-radius: 4px;
+}
+
+.sona-chat-time-tag {
+  align-self: center;
+  font-size: 11px;
+  color: #948b81;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 3px 10px;
+  border-radius: 10px;
+  margin: 4px 0;
+}
+
+/* Chat Bubbles */
+.sona-chat-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 85%;
+  animation: msgFadeIn 0.25s ease-out;
+}
+
+@keyframes msgFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sona-chat-msg.msg-bot {
+  align-self: flex-start;
+}
+
+.sona-chat-msg.msg-user {
+  align-self: flex-end;
+}
+
+.sona-chat-msg-bubble {
+  padding: 12px 16px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  border-radius: 18px;
+}
+
+.sona-chat-msg.msg-bot .sona-chat-msg-bubble {
+  background: #ffffff;
+  color: #2c251e;
+  border: 1px solid #ebe5dc;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.sona-chat-msg.msg-user .sona-chat-msg-bubble {
+  background: #09471f;
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+.sona-chat-msg-time {
+  font-size: 10.5px;
+  color: #9c9489;
+  margin-top: 4px;
+  align-self: flex-end;
+}
+
+.sona-chat-msg.msg-bot .sona-chat-msg-time {
+  align-self: flex-start;
+}
+
+/* Quick Action Chips */
+.sona-chat-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 6px;
+}
+
+.sona-chat-chip {
+  background: #ffffff;
+  border: 1px solid #cfc5b6;
+  color: #3f362d;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.sona-chat-chip:hover {
+  background: #09471f;
+  color: #ffffff;
+  border-color: #09471f;
+  transform: translateY(-1px);
+}
+
+/* Typing Indicator */
+.sona-chat-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 1px solid #ebe5dc;
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  width: fit-content;
+  align-self: flex-start;
+}
+
+.sona-chat-typing-dot {
+  width: 6px;
+  height: 6px;
+  background: #999;
+  border-radius: 50%;
+  animation: typingBounce 1.2s infinite ease-in-out;
+}
+
+.sona-chat-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.sona-chat-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-5px); }
+}
+
+/* Chat Footer / Input */
+.sona-chat-footer {
+  background: #ffffff;
+  padding: 12px 14px;
+  border-top: 1px solid #eee8df;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sona-chat-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sona-chat-input {
+  flex: 1;
+  border: 1px solid #d9d2c7;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 13.5px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background: #fbfaf8;
+}
+
+.sona-chat-input:focus {
+  border-color: #09471f;
+  background: #ffffff;
+}
+
+.sona-chat-send-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #09471f;
+  border: none;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.sona-chat-send-btn:hover {
+  background: #14612d;
+  transform: scale(1.05);
+}
+
+.sona-chat-footer-brand {
+  font-size: 10.5px;
+  color: #9c9489;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+  .sona-floating-chat-container {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .sona-chat-avatar-wrap {
+    width: 66px;
+    height: 66px;
+    box-shadow: 0 0 0 3.5px #d8efd9, 0 8px 22px rgba(18, 59, 34, 0.22);
+    padding: 5px;
+  }
+
+  .sona-chat-avatar-img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .sona-chat-pill {
+    padding: 10px 18px 10px 14px;
+    font-size: 13.5px;
+    border-radius: 14px;
+    margin-right: -6px;
+  }
+
+  .sona-chat-online-dot {
+    width: 17px;
+    height: 17px;
+    bottom: 5px;
+    right: 1px;
+    border: 2.5px solid #ffffff;
+  }
+
+  .sona-chat-dismiss-btn {
+    right: 64px;
+    top: -6px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .sona-chat-dismiss-btn svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .sona-chat-window {
+    bottom: 10px;
+    right: 10px;
+    width: calc(100vw - 20px);
+    max-width: 100vw;
+    height: min(640px, calc(100vh - 80px));
+    border-radius: 20px;
+  }
+}

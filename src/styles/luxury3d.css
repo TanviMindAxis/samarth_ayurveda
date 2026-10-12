@@ -1,0 +1,867 @@
+/* ========================================================
+   1. BRAND TRUST TICKER MARQUEE RIBBON (Floating Green Line)
+======================================================== */
+.sona-brand-ticker-ribbon {
+  width: 100%;
+  background: #084e10;
+  color: #ffffff;
+  overflow: hidden;
+  padding: 16px 0;
+  user-select: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 14px rgba(8, 78, 16, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+.sona-brand-ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: max-content;
+  animation: sonaBrandTickerScroll 35s linear infinite;
+  will-change: transform;
+}
+
+.sona-brand-ticker-ribbon:hover .sona-brand-ticker-track {
+  animation-play-state: paused;
+}
+
+.sona-brand-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  white-space: nowrap;
+}
+
+.ticker-text-bold {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+}
+
+.ticker-text-normal {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ticker-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+}
+
+@keyframes sonaBrandTickerScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ========================================================
+   2. LUXURY 3D UNIVERSAL SHOWCASE (Exact Reference Match)
+======================================================== */
+.sona-luxury-3d-section {
+  --sona-green: #1b4e2d;
+  --sona-green-dark: #12361f;
+  --sona-gold: #bca354;
+  --sona-text: #173f25;
+  --sona-muted: #5e6d62;
+  --sona-bg-1: #f7f9f6;
+  --sona-bg-2: #edf4ed;
+  --sona-shadow: 0 30px 80px rgba(20, 45, 28, 0.16);
+
+  position: relative;
+  overflow: hidden;
+  padding: 85px 24px 60px;
+  background:
+    radial-gradient(circle at 14% 18%, rgba(188, 163, 84, 0.14), transparent 26%),
+    radial-gradient(circle at 86% 22%, rgba(27, 78, 45, 0.14), transparent 26%),
+    linear-gradient(135deg, #f7f9f6 0%, #ffffff 45%, #eef5ee 100%);
+  font-family: var(--font-family, 'Bricolage Grotesque', sans-serif);
+}
+
+.sona-luxury-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(27, 78, 45, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 78, 45, 0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(circle at center, black 50%, transparent 95%);
+  -webkit-mask-image: radial-gradient(circle at center, black 50%, transparent 95%);
+  pointer-events: none;
+}
+
+.sona-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.8) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1px);
+  background-size: 120px 120px, 160px 160px, 140px 140px;
+}
+
+.sona-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(45px);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.sona-orb-1 {
+  width: 260px;
+  height: 260px;
+  background: rgba(31, 106, 57, 0.14);
+  left: -40px;
+  top: 100px;
+  animation: sonaBlob 8s ease-in-out infinite;
+}
+
+.sona-orb-2 {
+  width: 320px;
+  height: 320px;
+  background: rgba(188, 163, 84, 0.16);
+  right: -90px;
+  top: 70px;
+  animation: sonaBlob 10s ease-in-out infinite reverse;
+}
+
+.sona-orb-3 {
+  width: 280px;
+  height: 280px;
+  background: rgba(31, 106, 57, 0.1);
+  left: 38%;
+  bottom: -80px;
+  animation: sonaBlob 9s ease-in-out infinite;
+}
+
+.sona-luxury-container {
+  max-width: var(--container-max-width, 1400px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 40px;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+}
+
+.sona-copy {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.18s ease-out;
+}
+
+/* Heading: stronger, smoother & healthier hair */
+.sona-heading {
+  margin: 0;
+  font-size: clamp(38px, 4.8vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--sona-green);
+  max-width: 760px;
+  font-weight: 800;
+}
+
+.sona-heading-amp {
+  color: var(--sona-gold);
+  display: inline-block;
+  font-weight: 800;
+}
+
+.sona-heading-line2 {
+  display: block;
+  color: var(--sona-green);
+  margin-top: 4px;
+}
+
+.sona-description {
+  max-width: 620px;
+  margin: 24px 0 0;
+  color: var(--sona-muted);
+  font-size: clamp(15px, 1.15vw, 17.5px);
+  line-height: 1.75;
+}
+
+/* 3 Accordion / Points Cards */
+.sona-points {
+  display: grid;
+  gap: 14px;
+  margin-top: 26px;
+  margin-bottom: 26px;
+}
+
+.sona-point {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 22px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(18, 39, 24, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sona-point:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(18, 39, 24, 0.08);
+}
+
+.sona-point-icon {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e3ede4;
+  color: #1b5e20;
+  margin-top: 2px;
+}
+
+.sona-point-text strong {
+  display: block;
+  color: #173f25;
+  font-size: 15.5px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.sona-point-text span {
+  display: block;
+  color: var(--sona-muted);
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+/* Action Buttons (Shop Herbal Haircare & Know More About Us) */
+.sona-luxury-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.sona-btn-shop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1c5b2e 0%, #347240 100%);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(28, 91, 46, 0.28);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.sona-btn-shop:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(28, 91, 46, 0.38);
+  color: #ffffff;
+}
+
+.sona-btn-know-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #173f25;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.sona-btn-know-more:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  background: #fbfdfb;
+}
+
+/* Bottom Feature Tabs / Cards (Herbal Shampoo, Hair Oil, Natural Care) */
+.sona-luxury-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.sona-tab-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  padding: 16px 16px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 18px rgba(18, 39, 24, 0.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sona-tab-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(18, 39, 24, 0.08);
+}
+
+.sona-tab-card h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #173f25;
+  line-height: 1.3;
+}
+
+.sona-tab-card p {
+  margin: 0;
+  font-size: 12.5px;
+  color: #5e6d62;
+  line-height: 1.45;
+}
+
+/* ========================================================
+   3D INTERACTIVE STAGE & RIGHT SIDE CARDS
+======================================================= */
+.sona-stage {
+  position: relative;
+  min-height: 720px;
+  perspective: 1600px;
+}
+
+.sona-stage-glow {
+  position: absolute;
+  left: 12%;
+  top: 10%;
+  width: 76%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(188, 163, 84, 0.18) 0%, rgba(27, 78, 45, 0.12) 35%, transparent 70%);
+  filter: blur(28px);
+  animation: sonaPulse 6s ease-in-out infinite;
+}
+
+.sona-ring {
+  position: absolute;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid rgba(27, 78, 45, 0.09);
+  pointer-events: none;
+}
+
+.ring-a {
+  width: 500px;
+  height: 500px;
+  top: 50px;
+  animation: sonaSpin 22s linear infinite;
+}
+
+.ring-b {
+  width: 640px;
+  height: 640px;
+  top: -10px;
+  border-style: dashed;
+  opacity: 0.55;
+  animation: sonaSpinReverse 28s linear infinite;
+}
+
+.sona-spotlight {
+  position: relative;
+  min-height: 550px;
+  transition: transform 0.18s ease-out;
+}
+
+.sona-spotlight-shadow {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
+  width: 340px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.04) 55%, transparent 72%);
+  filter: blur(16px);
+  z-index: 1;
+}
+
+.sona-main-visual {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: sonaFloatMain 7s ease-in-out infinite;
+}
+
+.sona-main-card,
+.sona-side-card {
+  position: absolute;
+  overflow: hidden;
+  box-shadow: var(--sona-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: #ffffff;
+}
+
+.sona-main-card img,
+.sona-side-card img,
+.sona-gallery-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Central Card: SN4.png (Oil + Shampoo tied with red ribbon bow) */
+.front-card {
+  width: 320px;
+  height: 490px;
+  left: calc(50% - 160px);
+  top: 15px;
+  z-index: 6;
+  border-radius: 28px;
+  box-shadow: 0 22px 55px rgba(18, 39, 24, 0.14);
+}
+
+/* Left Card: Oil_edited.png (Home Made Hair Oil with sparkles) */
+.side-card-left {
+  width: 175px;
+  height: 265px;
+  left: 8px;
+  top: 85px;
+  z-index: 4;
+  border-radius: 22px;
+  transform: translateZ(20px) rotate(-8deg);
+  box-shadow: 0 16px 36px rgba(18, 39, 24, 0.10);
+}
+
+/* Right Card: SN10.png (Herbal haircare bottle with amla & coconut) */
+.side-card-right {
+  width: 180px;
+  height: 275px;
+  right: 8px;
+  top: 50px;
+  z-index: 4;
+  border-radius: 22px;
+  transform: translateZ(20px) rotate(8deg);
+  box-shadow: 0 16px 36px rgba(18, 39, 24, 0.10);
+}
+
+.chip-on-card {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1f6a39;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(18, 39, 24, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+}
+
+/* Floating Traditional Care Card (Overlapping mid-left of center product) */
+.float-card-mid-left {
+  position: absolute;
+  left: 15px;
+  top: 260px;
+  z-index: 8;
+  width: 220px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 16px 38px rgba(18, 39, 24, 0.09);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: sonaFloatCard 6s ease-in-out infinite;
+}
+
+.sona-float-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1f6a39;
+  background: #e3ede4;
+  margin-bottom: 8px;
+}
+
+.float-card-mid-left p {
+  margin: 0;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Floating Chips / Badges */
+.sona-chip {
+  position: absolute;
+  z-index: 8;
+  padding: 9px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  color: #1f6a39;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 10px 24px rgba(18, 39, 24, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: sonaChipFloat 5.5s ease-in-out infinite;
+}
+
+.chip-bottom-left {
+  left: 95px;
+  top: 485px;
+  animation-delay: 1.2s;
+}
+
+.chip-bottom-right {
+  right: 20px;
+  top: 455px;
+  animation-delay: 2.2s;
+}
+
+/* Gallery Strip at Bottom (3 Rounded Cards) */
+.sona-gallery-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  width: 100%;
+  margin-top: 18px;
+  position: relative;
+  z-index: 5;
+}
+
+.sona-gallery-card {
+  height: 135px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 12px 28px rgba(18, 39, 24, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.sona-gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(18, 39, 24, 0.12);
+}
+
+/* ========================================================
+   ANIMATION KEYFRAMES
+======================================================== */
+@keyframes sonaBlob {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -22px, 0) scale(1.05); }
+}
+
+@keyframes sonaPulse {
+  0%, 100% { transform: scale(1); opacity: 0.95; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+
+@keyframes sonaSpin {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
+@keyframes sonaSpinReverse {
+  from { transform: translateX(-50%) rotate(360deg); }
+  to { transform: translateX(-50%) rotate(0deg); }
+}
+
+@keyframes sonaFloatMain {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sonaFloatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+@keyframes sonaChipFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+/* ========================================================
+   RESPONSIVE MEDIA QUERIES
+======================================================== */
+@media (max-width: 1240px) {
+  .sona-stage {
+    min-height: 790px;
+  }
+
+  .front-card {
+    height: 500px;
+  }
+
+  .side-card-left {
+    width: 165px;
+    height: 255px;
+  }
+
+  .side-card-right {
+    width: 175px;
+    height: 270px;
+  }
+
+  .sona-float-card {
+    width: 195px;
+  }
+}
+
+@media (max-width: 989px) {
+  .sona-luxury-3d-section {
+    padding: 60px 16px 40px;
+  }
+
+  .sona-luxury-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .sona-copy {
+    text-align: center;
+    align-items: center;
+  }
+
+  .sona-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sona-point {
+    text-align: left;
+    width: 100%;
+  }
+
+  .sona-luxury-actions {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .sona-luxury-tabs {
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
+
+  .sona-tab-card {
+    text-align: left;
+  }
+
+  .sona-stage {
+    min-height: auto;
+  }
+
+  .sona-spotlight {
+    min-height: 470px;
+    height: 470px;
+  }
+
+  .sona-spotlight-shadow {
+    bottom: 8px;
+    width: 300px;
+  }
+
+  .front-card {
+    width: 290px;
+    left: calc(50% - 145px);
+    height: 440px;
+  }
+
+  .side-card-left {
+    width: 140px;
+    height: 220px;
+    left: 4px;
+    top: 70px;
+  }
+
+  .side-card-right {
+    width: 145px;
+    height: 230px;
+    right: 4px;
+    top: 50px;
+  }
+
+  .float-card-mid-left {
+    left: 10px;
+    top: 240px;
+    width: 190px;
+  }
+
+  .chip-bottom-left {
+    left: 40px;
+    top: 440px;
+  }
+
+  .chip-bottom-right {
+    right: 15px;
+    top: 420px;
+  }
+
+  .sona-gallery-strip {
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sona-heading {
+    font-size: clamp(30px, 8.5vw, 42px);
+  }
+
+  .sona-luxury-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .sona-btn-shop,
+  .sona-btn-know-more {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sona-luxury-tabs {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .sona-stage {
+    min-height: auto;
+  }
+
+  .ring-a {
+    width: 340px;
+    height: 340px;
+    top: 25px;
+  }
+
+  .ring-b {
+    width: 400px;
+    height: 400px;
+    top: 0px;
+  }
+
+  .sona-spotlight {
+    min-height: 395px;
+    height: 395px;
+  }
+
+  .sona-spotlight-shadow {
+    bottom: 6px;
+    width: 260px;
+    height: 36px;
+  }
+
+  .front-card {
+    width: 240px;
+    left: calc(50% - 120px);
+    height: 360px;
+    top: 15px;
+  }
+
+  .side-card-left {
+    width: 110px;
+    height: 170px;
+    top: 55px;
+    left: 0;
+  }
+
+  .side-card-right {
+    width: 115px;
+    height: 180px;
+    top: 35px;
+    right: 0;
+  }
+
+  .float-card-mid-left {
+    width: 160px;
+    padding: 10px 12px;
+    top: 195px;
+    left: 0;
+  }
+
+  .float-card-mid-left p {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .sona-float-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+    margin-bottom: 4px;
+  }
+
+  .sona-chip {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .chip-bottom-left {
+    left: 8px;
+    top: 350px;
+  }
+
+  .chip-bottom-right {
+    right: 5px;
+    top: 335px;
+  }
+
+  .sona-gallery-strip {
+    margin-top: 16px;
+  }
+
+  .sona-gallery-card {
+    height: 95px;
+    border-radius: 14px;
+  }
+
+  .sona-brand-ticker-ribbon {
+    padding: 12px 0;
+  }
+
+  .ticker-text-bold {
+    font-size: 16px;
+  }
+
+  .ticker-text-normal {
+    font-size: 13.5px;
+  }
+
+  .sona-brand-ticker-track,
+  .sona-brand-ticker-item {
+    gap: 20px;
+  }
+}

@@ -1,0 +1,161 @@
+/* ========================================================
+   HERO BANNER SLIDESHOW
+======================================================== */
+.hero-slideshow-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #0c1a12;
+}
+
+.hero-slides-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+}
+
+@media (max-width: 1024px) {
+  .hero-slides-wrapper {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-slides-wrapper {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slides-wrapper {
+    min-height: 240px;
+  }
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-slide.active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+.hero-slide picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-slide img {
+  width: 100%;
+  height: auto;
+  max-height: 640px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .hero-slide img {
+    max-height: 520px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-slide img {
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slide img {
+    max-height: 340px;
+  }
+}
+
+/* Dots Navigation */
+.hero-dots-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  border-radius: 30px;
+}
+
+.hero-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.hero-dot.active {
+  width: 28px;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+/* Navigation Arrow Overlays */
+.hero-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all var(--transition-fast);
+  opacity: 0;
+}
+
+.hero-slideshow-section:hover .hero-nav-arrow {
+  opacity: 1;
+}
+
+.hero-nav-arrow:hover {
+  background: rgba(0, 0, 0, 0.65);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.hero-prev-arrow {
+  left: 20px;
+}
+
+.hero-next-arrow {
+  right: 20px;
+}
+
+@media (max-width: 768px) {
+  .hero-nav-arrow {
+    display: none;
+  }
+}
